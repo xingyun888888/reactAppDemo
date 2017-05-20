@@ -16,7 +16,7 @@ export default class UploadBtn extends Component{
     if (!this.state.check) {
       e.preventDefault()
       this.refs.module.show({
-        title    : <span>该功能仅对要打印专业版商户开放<br/><a href="tel:4001585158" target="_blank" style={{color:'#796cdc'}}>400-158-5158</a></span>,
+        title    : <span>该功能仅对专业版商户开放<br/></span>,
         leftBtn  : '取消',
         rightBtn : '确认',
       })
