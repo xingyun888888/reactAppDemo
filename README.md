@@ -1,3 +1,4 @@
+
 ## 列表内容
 - react
 - redux
@@ -8,8 +9,9 @@
 - scss
 
 ## 使用
-- 安装项目依赖
+> git clone https://github.com/RubinCalm/react-app.git
 > $ npm install
+---
 -  开发环境
 > $ npm start
 - 生产环境
