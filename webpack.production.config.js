@@ -1,30 +1,40 @@
 var webpack = require('webpack');
+var path = require('path');
 var openBrowserPulgin = require('open-browser-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 	devtool: false,
-	entry: __dirname + '/app/app.js',
+	entry: {
+    main: path.resolve(__dirname,'app/index.js'),
+    vendor: ['react','react-dom','react-router','redux','react-redux','redux-thunk']
+  },
 	output: {
-		path:__dirname + '/public',
-		filename: "[name]-[hash].js"
+		path: path.resolve(__dirname, 'build'),
+		publicPath: '/',
+		filename:'js/[name]-[hash].js',
+		chunkFilename: 'js/[name].[chunkhash:5].chunk.js'
 	},
 	module: {
-		loaders: [
-			{test: /\.json$/, loader: "json-loader"},
-			{test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-			{test: /\.less$/, loader: ExtractTextPlugin.extract({
+		rules: [
+			{test: /\.json$/, use: "json-loader"},
+			{test: /\.js$/, exclude: /node_modules/, use: "babel-loader"},
+			{test: /\.scss$/, use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
-				use: 'css-loader?modules!postcss-loader!less-loader'
-			})}
+				use: 'css-loader?modules&localIdentName=[name]-[local]-[hash:base64:5]!postcss-loader!sass-loader'
+			})},
+			{test: /\.css$/, use: ExtractTextPlugin.extract({
+				fallback: 'style-loader',
+				use: 'css-loader!postcss-loader'
+			})},
+			{test: /\.(png|jpg|jpeg|gif)$/, use: 'url-loader?limit=8192&name=imgs/[hash:8].[name].[ext]'},
+			{test: /\.(svg)$/i, use: 'svg-sprite-loader', include: require.resolve('antd-mobile').replace(/warn\.js$/, '')}
 		]
 	},
-	devServer:{
-		contentBase: './public',
-		historyApiFallback: true,
-		inline: true,
-		port: 8082,
+	resolve: {
+	  modules: ['node_modules', path.join(__dirname, '../node_modules')],
+	  extensions: ['.web.js', '.js', '.json'],
 	},
 	plugins: [
 		new webpack.DefinePlugin({
@@ -32,7 +42,6 @@ module.exports = {
 				NODE_ENV:JSON.stringify('production')
 			}
 		}),
-		// new openBrowserPulgin({url:'http://localhost:8082/public'}),
 		new webpack.LoaderOptionsPlugin({
 			options: {
 				postcss: function(){
@@ -40,11 +49,14 @@ module.exports = {
 				},
 			}
 		}),
-		new webpack.BannerPlugin('Copyright Flying Unicons inc'),
 		new HtmlWebpackPlugin({
-			template: __dirname + '/app/index.tmpl.html'
+			template: __dirname + '/app/index.html'
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name:'react',
+			filename:'js/react.js'
+    }),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false
@@ -53,6 +65,6 @@ module.exports = {
 				warnings: false
 			}
 		}),
-		new ExtractTextPlugin("[name]-[hash].css")
+		new ExtractTextPlugin("css/[name]-[hash].css")
 	]
 }
