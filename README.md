@@ -9,10 +9,16 @@
 - scss
 
 ## 使用
-> git clone https://github.com/RubinCalm/react-app.git
-> $ npm install
+```
+$ git clone https://github.com/RubinCalm/react-app.git
+$ npm install
+```
 ---
 -  开发环境
-> $ npm start
+```
+$ npm start
+```  
 - 生产环境
-> $ npm run build
+```
+$ npm run build
+```
