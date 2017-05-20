@@ -13,14 +13,14 @@ export default class HomeSwiper extends Component{
   }
   componentDidMount() {
       this.setState({
-        data: [require('../../assets/imgs/swiper.png'), require('../../assets/imgs/QQbrowser.png'), require('../../assets/imgs/normal.gif')],
+        data: [require('../../assets/imgs/swiper.jpg'), require('../../assets/imgs/normal.jpg')],
       });
   }
   componentWillReceiveProps(nextProps){
     if (nextProps.check !== this.props.check ) {
       nextProps.check ?
         this.setState({
-          data: [require('../../assets/imgs/swiper.png'), require('../../assets/imgs/QQbrowser.png')],
+          data: [require('../../assets/imgs/swiper.jpg')],
         }) : ''
     }
   }
@@ -28,7 +28,7 @@ export default class HomeSwiper extends Component{
     const hProp = this.state.initialHeight ? { height: this.state.initialHeight } : {};
     return(
       <div>
-        <img src={require('../../assets/imgs/banner.png')} />
+        <img src={require('../../assets/imgs/banner.jpg')} />
         <Carousel
           className="my-carousel"
           autoplay={false}

@@ -18,13 +18,13 @@ export default class UploadHandle extends Component{
             <span onClick={()=>this.add()}>一键<br />添加</span>
           </Flex.Item>
           <Flex.Item>
-            <span onClick={()=>this.clear()}>一键<br />清除</span>
+            <span onClick={()=>this.clear()}>一键<br />添加</span>
           </Flex.Item>
           <Flex.Item>
-            <span onClick={()=>this.beaury()}>一键<br />美颜</span>
+            <span onClick={()=>this.beaury()}>一键<br />添加</span>
           </Flex.Item>
           <Flex.Item>
-            <span onClick={()=>this.print()}>立即<br />打印</span>
+            <span onClick={()=>this.print()}>一键<br />添加</span>
           </Flex.Item>
         </Flex>
       </div>
