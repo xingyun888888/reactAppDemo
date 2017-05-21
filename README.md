@@ -15,6 +15,16 @@ $ npm install
 ```
 -  开发环境
 ```
+// open webpack.config.js
+devServer:{
+  host: '192.168.0.107',  // your ip address,
+  contentBase: './build',
+  historyApiFallback: true,
+  inline: true,
+  port: 8800,
+  },
+  ```
+```
 $ npm start
 ```  
 - 生产环境
