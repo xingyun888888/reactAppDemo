@@ -22,8 +22,8 @@ devServer:{
   historyApiFallback: true,
   inline: true,
   port: 8800,
-  },
-  ```
+},
+```
 ```
 $ npm start
 ```  
