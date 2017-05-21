@@ -1,7 +1,8 @@
 const host = 'http://192.168.0.108:8080'
 
 export const check = host+'/check'
-
+export const randomdir = host+'/randomdir'
+export const upload = host+'/upload'
 
 
 
