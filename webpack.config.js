@@ -38,7 +38,7 @@ module.exports = {
 	},
 	// webpack-dev-server 配置
 	devServer:{
-		host: '192.168.31.190',
+		host: '192.168.0.107',
 		contentBase: './build',
 		historyApiFallback: true,
 		inline: true,
