@@ -1,119 +1,91 @@
 import React,{Component} from 'react'
 import {Link,browserHistory} from 'react-router'
 import styles from '../../assets/scss/index.scss'
-import * as api from '../../api'
 import {Picker} from 'antd-mobile';
-import {store} from '../../store'
-import {handleType} from '../../actions'
 
-
+const seasons = [
+  [
+    {
+      label: '2013',
+      value: '2013',
+    },
+    {
+      label: '2014',
+      value: '2014',
+    },
+  ]
+];
 export default class UploadType extends Component{
   constructor(props){
     super(props)
-  }
-  componentWillMount(){
-    const type = this.props.params;
-    this.setState({
-      type,
-      size: api[type].size,
-      edge: api[type].edge,
-      sSize: [api[type].size.default],
-      sEdge: api[type].edge ? [api[type].edge.default] : [],
-      //data
-      sizeVal: api[type].size.val,
-      edgeVal: api[type].edge ? api[type].edge.val : '',
-      width: api[type].size.width || '',
-      height: api[type].size.height || '',
-      num:'1'
-    })
+    this.state = {
+      size: '',
+      edge: '',
+      defaultSize: [],
+      defaultEdge: []
+    }
   }
   handleNum(val){
-    this.setState({
-      num:val.target.value.replace(/\D/g,'')
-    })
+
   }
   handleSize(val){
-    const size = this.state.size.option[0]
-    size.map((e, i) => {
-      if (e.value === val[0]) {
-        this.setState({
-          sizeVal:e.options.val,
-          width:e.options.width || '',
-          height:e.options.height || ''
-        })
-      }
-    })
-    this.setState({
-      sSize:val
-    })
+    const defaultValue = val[0]
+    this.props.handleSize(defaultValue)
   }
   handleEdge(val){
-    const edge = this.state.edge.option[0]
-    edge.map((e, i) => {
-      if (e.value === val[0]) {
-        this.setState({
-          edgeVal:e.val
-        })
-      }
-    })
-    this.setState({
-      sEdge:val
-    })
+
+  }
+  componentWillReceiveProps(nextProps){
+    const {options} = nextProps
+    options.size ? this.setState({
+      size: options.size,
+      defaultSize: [options.size.default]
+    }) : ''
+    options.edge ? this.setState({
+      edge: options.edge,
+      defaultEdge: [options.edge.default]
+    }) : ''
   }
   render(){
-    this._dispatch();
     return(
       <div className={styles.uploadType}>
         {this._moduleSize()}
         {this._moduleEdge()}
-        <input type='tel' value={this.state.num} onChange={e => this.handleNum(e)} maxLength={5}/>份
+        <input type='tel' value='1' onChange={e => this.handleNum(e)} maxLength={5}/>份
       </div>
     )
   }
   _moduleSize(){
-    const size = this.state.size.option
-    return(
-      <Picker
-        data={size}
-        title="选择尺寸"
-        cascade={false}
-        extra="请选择"
-        value={this.state.sSize}
-        onChange={v => this.handleSize(v)}
-      >
-        <CustomChildren></CustomChildren>
-      </Picker>
-    )
-  }
-  _moduleEdge(){
-    if (this.state.edge) {
-      const edge = this.state.edge
+    if (this.state.size != '') {
       return(
         <Picker
-          data={edge.option}
-          title="选择边距"
+          data={this.state.size.option}
+          title="选择尺寸"
           cascade={false}
           extra="请选择"
-          value={this.state.sEdge}
-          onChange={v => this.handleEdge(v)}
+          value={this.state.defaultSize}
+          onChange={v => this.handleSize(v)}
         >
           <CustomChildren></CustomChildren>
         </Picker>
       )
     }
   }
-  _dispatch(){
-    const options = this.state.width === '' ? {
-      sizeVal: this.state.sizeVal,
-      num: this.state.num
-    } : {
-      sizeVal: this.state.sizeVal,
-      edgeVal: this.state.edgeVal,
-      width: this.state.width,
-      height: this.state.height,
-      num: this.state.num
+  _moduleEdge(){
+    if (this.state.edge != '') {
+      return(
+        <Picker
+          data={this.state.edge.option}
+          title="选择边距"
+          cascade={false}
+          extra="请选择"
+          value={this.state.defaultEdge}
+          onChange={v => this.handleEdge(v)}
+        >
+          <CustomChildren></CustomChildren>
+        </Picker>
+      )
     }
-    store.dispatch(handleType(options))
   }
 }
 

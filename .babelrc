@@ -4,8 +4,6 @@
 		{
 			"libraryName" : "antd-mobile",
 			"style" : "css"
-		},{
-			"libraryName" : "whatwg-fetch"
 		}
 	]]
 }

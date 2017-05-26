@@ -28,16 +28,24 @@ export const admin = () => dispatch => {
     })
 }
 
-export const handleType = (options) => {
+export const uploadType = (param,options) => {
   return {
     type: 'uploadType',
+    param,
     options
   }
 }
 
-export const update = (update) => {
+export const uploadFiles = (files) => {
   return {
-    type: 'updata',
-    update
+    type: 'uploadFiles',
+    files
+  }
+}
+
+export const uploadTitle = (title) => {
+  return {
+    type: 'uploadTitle',
+    title
   }
 }

@@ -6,20 +6,14 @@ export default class TopTitle extends Component{
   constructor(props){
     super(props)
     this.state = {
-      title: '普通照'
+      title: this.props.title
     }
   }
-  componentWillMount(){
-    const type = this.props.params
-    switch (type) {
-      case 'portrait':
-        this.setState({title:'证件照'})
-        break;
-      case 'file':
-        this.setState({title:'文档'})
-        break;
-      default:
-
+  componentWillReceiveProps(nextProps){
+    if (nextProps.title != this.state.title) {
+      this.setState({
+        title: nextProps.title
+      })
     }
   }
   render(){

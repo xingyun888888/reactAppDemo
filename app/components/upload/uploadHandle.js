@@ -9,30 +9,33 @@ export default class UploadHandle extends Component{
   constructor(props){
     super(props)
     this.state = {
-      toChocie: false
+      toChocie: false,
     }
+    this.add = this.add.bind(this)
   }
   add(e){
-    e.stopPropagation();
-    alert(1)
+    const binUpload = this._binUpload
     const url = api.randomdir
     const options = {
       method: 'post',
-      mode: 'cros',
+      // mode: 'cros',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       }
     }
+    binUpload.click()
     fetch(url, options)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
       })
-      .catch(err => [
-        console.log(err)
-      ])
-    this.refs.binUpload.click()
+      .catch(err => {
+        // console.log(err);
+      })
+  }
+  preview(files){
+
   }
   clear(){
     console.log(store.getState())
@@ -43,16 +46,21 @@ export default class UploadHandle extends Component{
   print(){
     console.log(store.getState())
   }
-  preview(e){
-    console.log(e.target.files)
-  }
   render(){
     return(
       <div>
         <Flex className={styles.uploadHandle}>
           <Flex.Item>
-            <span onClick={this.add.bind(this)}>一键<br />添加</span>
-            <BinUpload ref='binUpload' url={api.upload} preview={this.preview}/>
+            <span onClick={this.add}>一键<br />添加</span>
+            <BinUpload
+              ref={binUpload => this._binUpload = binUpload}
+              url={api.upload}
+              multiple='true'  // 指定 是否多文件上传
+              size='1' //单位为 mb
+              thread='3' //并发上传数，0位无并发
+              type='jpg,jpeg'
+              preview={this.preview}
+            />
           </Flex.Item>
           <Flex.Item>
             <span onClick={()=>this.clear()}>一键<br />添加</span>

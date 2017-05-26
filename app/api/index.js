@@ -104,7 +104,7 @@ export const photo = {
     }]]
   }
 }
-export const file = {
+export const portrait = {
   size:{
     default: 'A4',
     val:'20',
@@ -119,6 +119,39 @@ export const file = {
       value:'B5',
       options:{
         val:'19'
+      },
+    }]]
+  }
+}
+export const file = {
+  size:{
+    default: '5寸',
+    val:'6',
+    width:'1016',
+    height:'1524',
+    option: [[{
+      label:'4寸',
+      value:'4寸',
+      options:{
+        val:'5',
+        width:'760',
+        height:'1020',
+      },
+    },{
+      label:'5寸',
+      value:'5寸',
+      options:{
+        val:'6',
+        width:'889',
+        height:'1270',
+      },
+    },{
+      label:'6寸',
+      value:'6寸',
+      options:{
+        val:'7',
+        width:'1016',
+        height:'1524',
       },
     }]]
   }

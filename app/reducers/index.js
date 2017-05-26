@@ -1,13 +1,11 @@
 import {combineReducers} from 'redux'
-// import {routerReducer} from 'react-router-redux'
 import admin from './admin'
-import uploadType from './uploadType'
-import update from './update'
+import {uploadTitle ,uploadType, uploadFiles} from './upload'
 
 const reducers = combineReducers({
   admin,
+  uploadTitle,
   uploadType,
-  update
-  // routing:routerReducer
+  uploadFiles,
 })
 export default reducers
