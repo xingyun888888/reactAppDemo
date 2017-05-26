@@ -8,13 +8,13 @@
 - scss
 
 ## 使用
-```
+``` bash
 $ git clone https://github.com/RubinCalm/react-app.git
 $ cd react-app
 $ npm install
 ```
 -  开发环境
-```
+``` javascript
 // open webpack.config.js
 devServer:{
   host: '192.168.0.107',  // your ip address,
@@ -24,11 +24,11 @@ devServer:{
   port: 8800,
 },
 ```
-```
+``` bash
 $ npm start
 ```  
 - 生产环境
-```
+``` bash
 $ npm run build
 ```
 ## 说明
