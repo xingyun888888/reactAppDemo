@@ -4,7 +4,7 @@ export default class Edit extends Component{
   render(){
     return(
       <div>
-        edit
+        edit myAppp dfsdf
         {this.props.children}
       </div>
     )

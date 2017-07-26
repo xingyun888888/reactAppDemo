@@ -53,10 +53,10 @@ module.exports = {
 			template: __dirname + '/app/index.html'
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name:'react',
-			filename:'js/react.js'
-    }),
+		new webpack.optimize.CommonsChunkPlugin({
+		  name:'react',
+				filename:'js/react.js'
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false

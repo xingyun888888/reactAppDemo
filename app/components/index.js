@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Home from './home'
 
+
+@connect((state)=>state)
 class IndexComponent extends Component{
   render(){
     return(
@@ -12,6 +14,7 @@ class IndexComponent extends Component{
   }
 }
 
-const Index = connect()(IndexComponent)
+//const Index = connect()(IndexComponent)
 
-export default Index
+//export default Index
+export default IndexComponent;

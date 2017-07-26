@@ -7,9 +7,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 	devtool: 'eval-source-map',
 	entry: {
-    main: path.resolve(__dirname,'app/index.js'),
-    vendor: ['react','react-dom','react-router','redux','react-redux','redux-thunk']
-  },
+		main: path.resolve(__dirname,'app/index.js'),
+		vendor: ['react','react-dom','react-router','redux','react-redux','redux-thunk']
+    },
 	output: {
 		path: path.resolve(__dirname, 'build'),
 		publicPath: '/',
@@ -20,7 +20,7 @@ module.exports = {
 		rules: [
 			{test: /\.json$/, use: "json-loader"},
 			{test: /\.js$/, exclude: /node_modules/, use: "babel-loader"},
-      {test: /\.scss$/, use: ExtractTextPlugin.extract({
+            {test: /\.scss$/, use: ExtractTextPlugin.extract({
 				fallback: 'style-loader',
 				use: 'css-loader?modules&localIdentName=[name]-[local]-[hash:base64:5]!postcss-loader!sass-loader'
 			})},
@@ -29,7 +29,8 @@ module.exports = {
 				use: 'css-loader!postcss-loader'
 			})},
 			{test: /\.(png|jpg|jpeg|gif)$/, use: 'url-loader?limit=8192&name=imgs/[hash:8].[name].[ext]'},
-			{test: /\.(svg)$/i, use: 'svg-sprite-loader', include: require.resolve('antd-mobile').replace(/warn\.js$/, '')}
+            {test: /\.(svg)$/i, use: 'svg-sprite-loader', include: require.resolve('antd-mobile').replace(/warn\.js$/, '')},
+            {test: /\.(svg)$/i, use: 'svg-sprite-loader', include:/assets\/images\/svg/}
 		]
 	},
 	resolve: {
@@ -38,7 +39,7 @@ module.exports = {
 	},
 	// webpack-dev-server 配置
 	devServer:{
-		host: '192.168.0.107',
+		host: 'localhost',
 		contentBase: './build',
 		historyApiFallback: true,
 		inline: true,
@@ -56,10 +57,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: __dirname + '/app/index.html'
 		}),
-    new webpack.optimize.CommonsChunkPlugin({
-      name:'react',
-			filename:'js/react.js'
-    }),
+		new webpack.optimize.CommonsChunkPlugin({
+				name:'react',
+				filename:'js/react.js'
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false

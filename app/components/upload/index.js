@@ -11,8 +11,36 @@ import UploadFile from './uploadFile'
 import UploadHandle from './uploadHandle'
 
 
+
+
+const mapStateToProps = (state) => {
+    // console.log(state.uploadType.api);
+    const params = browserHistory.getCurrentLocation().pathname.split('/');
+    const paramsUrl = params[params.length-1]
+    if (paramsUrl==='portrait' && !state.admin.check) {
+        browserHistory.push('/')
+    }
+    return {
+        title: state.uploadTitle.title,
+        options: state.uploadType.api
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    renderTitle: (id) => {
+        dispatch(uploadTitle(id))
+    },
+    renderType: (param,options) => {
+        dispatch(uploadType(param,options))
+    }
+})
+
+
+@connect(mapStateToProps,mapDispatchToProps)
 class UploadIndex extends Component{
   constructor(props){
+    console.log("sdfsdfsfsdfdsfdfd");
+    console.log(props);
     super(props)
     this.state = {
       title: this.props.title,
@@ -61,32 +89,33 @@ class UploadIndex extends Component{
     )
   }
 }
+//
+// const mapStateToProps = (state) => {
+//   // console.log(state.uploadType.api);
+//   const params = browserHistory.getCurrentLocation().pathname.split('/');
+//   const paramsUrl = params[params.length-1]
+//   if (paramsUrl==='portrait' && !state.admin.check) {
+//     browserHistory.push('/')
+//   }
+//   return {
+//     title: state.uploadTitle.title,
+//     options: state.uploadType.api
+//   }
+// }
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   renderTitle: (id) => {
+//     dispatch(uploadTitle(id))
+//   },
+//   renderType: (param,options) => {
+//     dispatch(uploadType(param,options))
+//   }
+// })
 
-const mapStateToProps = (state) => {
-  // console.log(state.uploadType.api);
-  const params = browserHistory.getCurrentLocation().pathname.split('/');
-  const paramsUrl = params[params.length-1]
-  if (paramsUrl==='portrait' && !state.admin.check) {
-    browserHistory.push('/')
-  }
-  return {
-    title: state.uploadTitle.title,
-    options: state.uploadType.api
-  }
-}
+// const Upload = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(UploadIndex);
 
-const mapDispatchToProps = (dispatch) => ({
-  renderTitle: (id) => {
-    dispatch(uploadTitle(id))
-  },
-  renderType: (param,options) => {
-    dispatch(uploadType(param,options))
-  }
-})
-
-const Upload = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UploadIndex);
-
-export default Upload
+//export default Upload
+export default UploadIndex;
